@@ -39,6 +39,7 @@ module Text.Regex.Base.RegexLike (
   AllSubmatches(..),AllTextSubmatches(..),AllMatches(..),AllTextMatches(..)
   ) where
 
+import Control.Monad.Fail
 import Data.Array(Array,(!))
 import Data.Maybe(isJust)
 import qualified Data.ByteString as B (take,drop,empty,ByteString)
@@ -189,7 +190,7 @@ class (Extract source)=> RegexLike regex source where
 -- > ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"]
 class (RegexLike regex source) => RegexContext regex source target where
   match :: regex -> source -> target
-  matchM :: (Monad m) => regex -> source -> m target
+  matchM :: (Monad m, MonadFail m) => regex -> source -> m target
 
 ----------------
 -- | Extract allows for indexing operations on String or ByteString.

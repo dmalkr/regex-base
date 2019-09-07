@@ -45,6 +45,7 @@ module Text.Regex.Base (getVersion_Text_Regex_Base
   -- | RegexLike defines classes and type, and 'Extract' instances
   ,module Text.Regex.Base.RegexLike) where
 
+import Control.Monad.Fail
 import Data.Version(Version(..))
 import Text.Regex.Base.RegexLike
 import Text.Regex.Base.Context()
